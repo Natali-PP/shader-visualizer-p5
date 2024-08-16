@@ -1,6 +1,6 @@
 import p5 from "p5";
 
-export const shaderSketch = (p: p5) => {
+export const shaderSketch = (p: p5, angleScale?: number) => {
   let shaderProgram: p5.Shader;
 
   p.preload = () => {
@@ -14,18 +14,19 @@ export const shaderSketch = (p: p5) => {
   };
 
   p.setup = () => {
-    p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
+    p.createCanvas(2 * p.windowWidth, 2 * p.windowHeight, p.WEBGL);
     p.noStroke();
-    // disables scaling for retina screens which can create inconsistent scaling between displays
-    p.pixelDensity(1);
+    p.perspective();
   };
 
   p.draw = () => {
     if (shaderProgram) {
-      p.rectMode(p.CENTER);
       p.shader(shaderProgram);
-      shaderProgram.setUniform("u_time", p.millis() / 1000.0); // we divide millis by 1000 to convert it to seconds
-      p.plane(100, 100);
+      shaderProgram.setUniform("iResolution", [p.width, p.height]);
+      shaderProgram.setUniform("iTime", p.millis() / 1000.0);
+      !!angleScale ? shaderProgram.setUniform("angleScale", angleScale) : null;
+      p.plane(p.width, 2 * p.height);
+      p.resizeCanvas(p.windowWidth * 2, p.windowHeight * 2);
     } else {
       console.error("Shader program is not defined.");
     }
