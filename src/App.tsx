@@ -1,14 +1,28 @@
-import { useState } from "react";
+// import { useState } from "react";
 import "./App.css";
-import { P5Wrapper } from "./components/P5Wrapper";
-import { shaderSketch } from "./components/shaderSketch";
+// import { P5Wrapper } from "./components/P5Wrapper";
+// import { shaderSketch } from "./components/shaderSketch";
 
 function App() {
-  const [angleScale, setAngleScale] = useState(30.0);
+  // const [angleScale, setAngleScale] = useState(30.0);
+  // const uniforms = {
+  //   iResolution: [window.innerWidth, window.innerHeight],
+  //   iTime: performance.now() / 1000,
+  //   angleScale: angleScale,
+  // };
   return (
     <>
-      <div className="">
-        <P5Wrapper sketch={(p) => shaderSketch(p, angleScale)} />
+      {/* <div className="">
+        <P5Wrapper
+          sketch={(p) =>
+            shaderSketch(
+              p,
+              uniforms,
+              "/shaders/vertex.vert",
+              "/shaders/fragment.frag"
+            )
+          }
+        />
       </div>
       <div className=" absolute top-0 left-0 w-full h-full text-cyan-50">
         <div
@@ -26,7 +40,7 @@ function App() {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
